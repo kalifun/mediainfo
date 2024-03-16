@@ -1,0 +1,21 @@
+[package]
+name = "mediainfo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ffmpeg-next = "6.1.1"
+
+[[bin]]
+name = "demo"
+path = "bin/demo.rs"
+
+[[bin]]
+name = "size"
+path = "bin/size.rs"
+
+[[bin]]
+name = "human"
+path = "bin/human.rs"

@@ -2,12 +2,11 @@ pub mod audio;
 pub mod subtitle;
 pub mod video;
 
-use crate::stream::subtitle::SubtitleStream;
 use crate::stream::audio::AudioStream;
+use crate::stream::subtitle::SubtitleStream;
 use crate::stream::video::VideoStream;
 
-
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct MediaFile {
     pub filename: String,
     pub filepath: String,
@@ -24,5 +23,8 @@ pub struct MediaFile {
     pub subtitle_streams: Vec<SubtitleStream>,
 }
 
-
-
+impl MediaFile {
+    fn new() {
+        
+    }
+}

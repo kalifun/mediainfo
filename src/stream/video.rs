@@ -1,5 +1,4 @@
-
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct VideoStream {
     pub codec: String,
     pub format: String,
@@ -16,4 +15,11 @@ pub struct VideoStream {
     pub default: bool,
     pub forced: bool,
     pub color_primaries: String,
+}
+
+
+impl VideoStream {
+    fn new() {
+        
+    }
 }

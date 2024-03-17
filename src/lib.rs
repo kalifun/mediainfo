@@ -1,5 +1,7 @@
 mod utils;
-
+mod stream;
+#[macro_use]
+extern crate serde;
 use std::{fs, path::Path};
 
 use ffmpeg_next as ffmpeg;

@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct AudioStream {
     pub id: usize,
     pub format: String,
@@ -13,4 +13,9 @@ pub struct AudioStream {
     pub language: String,
     pub default: bool,
     pub forced: bool,
+}
+
+
+impl AudioStream {
+    
 }

@@ -12,3 +12,7 @@ serde = { version = "1.0", features = ["derive"] }
 [[bin]]
 name = "demo"
 path = "bin/demo.rs"
+
+[[bin]]
+name = "audio"
+path = "bin/audio.rs"

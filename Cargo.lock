@@ -139,6 +139,7 @@ name = "mediainfo"
 version = "0.1.0"
 dependencies = [
  "ffmpeg-next",
+ "lazy_static",
  "serde",
 ]
 

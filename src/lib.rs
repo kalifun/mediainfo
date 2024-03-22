@@ -1,13 +1,16 @@
-mod utils;
+mod format;
 pub mod stream;
+mod utils;
 #[macro_use]
 extern crate serde;
 use std::{fs, path::Path};
-
+#[macro_use]
+extern crate lazy_static;
 use ffmpeg_next as ffmpeg;
 
+use crate::format::format_name;
 
-pub fn read_file<P: AsRef<Path>>(path: &P){
+pub fn read_file<P: AsRef<Path>>(path: &P) {
     let path = path.as_ref();
     let file_name = path.file_name().unwrap().to_str().unwrap().to_string();
     let file_size = fs::metadata(path).unwrap().len();
@@ -20,11 +23,10 @@ pub fn read_file<P: AsRef<Path>>(path: &P){
     let mut format_ctx = ffmpeg::format::input(&path);
     match format_ctx {
         Ok(input) => {
-            println!("name {}",input.format().name());
-        },
+            println!("name {:?}", format_name(&input.format(), path));
+        }
         Err(err) => {
             eprintln!("{}", err);
         }
     }
-    
 }

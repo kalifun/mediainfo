@@ -1,4 +1,4 @@
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct SubtitleStream {
     pub id: usize,
     pub format: String,
@@ -14,9 +14,64 @@ pub struct SubtitleStream {
     pub forced: bool,
 }
 
-
 impl SubtitleStream {
-    fn new() {
-        
+    pub fn set_id(mut self, id: usize) -> Self {
+        self.id = id;
+        self
+    }
+
+    pub fn set_format(mut self, format: String) -> Self {
+        self.format = format;
+        self
+    }
+
+    pub fn set_codec_info(mut self, codec_info: String) -> Self {
+        self.codec_info = codec_info;
+        self
+    }
+
+    pub fn set_duration(mut self, duration: f64) -> Self {
+        self.duration = duration;
+        self
+    }
+
+    pub fn set_bitrate(mut self, bitrate: u64) -> Self {
+        self.bitrate = bitrate;
+        self
+    }
+
+    pub fn set_frame_rate(mut self, frame_rate: f32) -> Self {
+        self.frame_rate = frame_rate;
+        self
+    }
+
+    pub fn set_count_of_elements(mut self, count_of_elements: u64) -> Self {
+        self.count_of_elements = count_of_elements;
+        self
+    }
+
+    pub fn set_stream_size(mut self, stream_size: u64) -> Self {
+        self.stream_size = stream_size;
+        self
+    }
+
+    pub fn set_title(mut self, title: String) -> Self {
+        self.title = title;
+        self
+    }
+
+    pub fn set_language(mut self, language: String) -> Self {
+        self.language = language;
+        self
+    }
+
+    pub fn set_default(mut self, default: bool) -> Self {
+        self.default = default;
+        self
+    }
+
+    pub fn set_forced(mut self, forced: bool) -> Self {
+        self.forced = forced;
+        self
     }
 }

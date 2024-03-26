@@ -11,10 +11,9 @@ serde = { version = "1.0", features = ["derive"] }
 lazy_static = "1.4.0"
 
 [[bin]]
-name = "demo"
-path = "bin/demo.rs"
+name = "readfile"
+path = "bin/readfile.rs"
 
 [[bin]]
 name = "audio"
 path = "bin/audio.rs"
-

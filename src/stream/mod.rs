@@ -15,7 +15,7 @@ pub struct MediaFile {
     pub filesize_iec: String,
     pub created_time: String,
     pub modified_time: String,
-    pub duration: f64,
+    pub duration: u64,
     pub format: String,
     pub writing_lib: String,
     pub video_streams: Vec<VideoStream>,
@@ -59,7 +59,7 @@ impl MediaFile {
         self
     }
 
-    pub fn set_duration(mut self, duration: f64) -> Self {
+    pub fn set_duration(mut self, duration: u64) -> Self {
         self.duration = duration;
         self
     }

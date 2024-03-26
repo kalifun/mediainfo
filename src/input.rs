@@ -32,4 +32,28 @@ impl<'a> FileInput<'a> {
             }
         }
     }
+
+    pub fn duration(&self) -> u64 {
+        if self.input.duration() >= 0 {
+            self.input.duration() as u64 / ffmpeg_next::ffi::AV_TIME_BASE as u64
+        } else {
+            0
+        }
+    }
+
+    pub fn get_bit_rate(&self) -> u64 {
+        self.input.bit_rate() as u64
+    }
+
+    pub fn get_writing_lib(&self) -> String {
+        let metadata = self.input.metadata();
+        match metadata.get("encoder") {
+            Some(name) => name.to_string(),
+            None => "".to_string(),
+        }
+    }
+
+    pub fn get_info(&self) {
+        println!("{:?}", self.input.metadata());
+    }
 }

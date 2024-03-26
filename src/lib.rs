@@ -26,7 +26,16 @@ pub fn read_file<P: AsRef<Path>>(path: &P) -> io::Result<MediaFile> {
     let fi = FileInput::new(format_ctx, path);
     let full_format_name = fi.format_name();
     println!("{}", full_format_name);
-
-    let media_file = MediaFile::default();
+    println!("{}", utils::duration_format(fi.duration()));
+    let mut media_file = MediaFile::default();
+    media_file = media_file.set_format(full_format_name);
+    media_file = media_file.set_duration(fi.duration());
+    media_file = media_file
+        .set_filename(file_name)
+        .set_filesize(file_size)
+        .set_filesize_is(file_size_is)
+        .set_filesize_iec(file_size_iec);
+    fi.get_info();
+    println!("{:?}", media_file);
     Ok(media_file)
 }

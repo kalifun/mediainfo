@@ -50,3 +50,17 @@ mod tests {
         assert_eq!(convert_to_iec_units(10), "10.0B");
     }
 }
+
+pub fn duration_format(secs: u64) -> String {
+    let hours = secs / 3600;
+    let minutes = (secs % 3600) / 60;
+
+    let formatted_duration = format!("{:02}h {:02}m", hours, minutes);
+    formatted_duration
+}
+
+#[test]
+fn test_duration_format() {
+    assert_eq!(duration_format(3600), "01h 00m");
+    assert_eq!(duration_format(59148356183), "16430098h 56m");
+}

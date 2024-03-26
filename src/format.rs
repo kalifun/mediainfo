@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 use std::path::Path;
 lazy_static! {
-    static ref FORMAT_MAP: HashMap<&'static str, &'static str> = {
+    pub static ref FORMAT_MAP: HashMap<&'static str, &'static str> = {
         let mut map = HashMap::new();
         map.insert("3g2", "3GP2 (3G2) Multimedia File Format");
         map.insert("3gp", "3GP (3GPP) Multimedia File Format");
@@ -39,7 +39,7 @@ lazy_static! {
 }
 
 lazy_static! {
-    static ref EXTENSION_MAP: HashMap<&'static str, &'static str> = {
+    pub static ref EXTENSION_MAP: HashMap<&'static str, &'static str> = {
         let mut map = HashMap::new();
         map.insert("mov", "QuickTime File Format");
         map.insert("mp4", "MPEG-4 Part 14");
@@ -52,22 +52,4 @@ lazy_static! {
         map.insert("mp3", "MPEG-1 Audio Layer III");
         map
     };
-}
-
-pub fn format_name(format: &Input, path: &Path) -> String {
-    if let Some(full_name) = FORMAT_MAP.get(format.name()) {
-        full_name.to_string()
-    } else {
-        let extension = path
-            .extension()
-            .and_then(|ext| ext.to_str())
-            .unwrap_or_default()
-            .to_lowercase();
-
-        if let Some(full_name) = EXTENSION_MAP.get(extension.as_str()) {
-            full_name.to_string()
-        } else {
-            format.name().to_string()
-        }
-    }
 }

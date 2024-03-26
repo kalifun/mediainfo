@@ -1,16 +1,17 @@
 mod format;
+mod input;
 pub mod stream;
 mod utils;
 #[macro_use]
 extern crate serde;
-use std::{fs, path::Path};
+use std::{fs, io, path::Path};
 #[macro_use]
 extern crate lazy_static;
 use ffmpeg_next as ffmpeg;
+use stream::MediaFile;
 
-use crate::format::format_name;
-
-pub fn read_file<P: AsRef<Path>>(path: &P) {
+use crate::input::FileInput;
+pub fn read_file<P: AsRef<Path>>(path: &P) -> io::Result<MediaFile> {
     let path = path.as_ref();
     let file_name = path.file_name().unwrap().to_str().unwrap().to_string();
     let file_size = fs::metadata(path).unwrap().len();
@@ -20,13 +21,12 @@ pub fn read_file<P: AsRef<Path>>(path: &P) {
         "file_name: {} \n file_size: {} \n file_size_is {} \n file_size_iec {}",
         file_name, file_size, file_size_is, file_size_iec,
     );
-    let mut format_ctx = ffmpeg::format::input(&path);
-    match format_ctx {
-        Ok(input) => {
-            println!("name {:?}", format_name(&input.format(), path));
-        }
-        Err(err) => {
-            eprintln!("{}", err);
-        }
-    }
+    let format_ctx = ffmpeg::format::input(&path)?;
+
+    let fi = FileInput::new(format_ctx, path);
+    let full_format_name = fi.format_name();
+    println!("{}", full_format_name);
+
+    let media_file = MediaFile::default();
+    Ok(media_file)
 }

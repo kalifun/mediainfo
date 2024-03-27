@@ -1,3 +1,4 @@
+use crate::ffmpeg::format::context::common::StreamIter;
 use crate::ffmpeg::format::context::Input;
 use crate::format::EXTENSION_MAP;
 use crate::format::FORMAT_MAP;
@@ -53,7 +54,7 @@ impl<'a> FileInput<'a> {
         }
     }
 
-    pub fn get_info(&self) {
-        println!("{:?}", self.input.metadata());
+    pub fn get_streams(&self) -> StreamIter {
+        self.input.streams()
     }
 }

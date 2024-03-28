@@ -42,6 +42,7 @@ impl<'a> FileInput<'a> {
         }
     }
 
+    #[warn(dead_code)]
     pub fn get_bit_rate(&self) -> u64 {
         self.input.bit_rate() as u64
     }

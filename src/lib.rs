@@ -1,5 +1,6 @@
 mod format;
 mod input;
+mod meta;
 pub mod stream;
 mod utils;
 #[macro_use]
@@ -7,10 +8,10 @@ extern crate serde;
 use std::{fs, io, path::Path};
 #[macro_use]
 extern crate lazy_static;
+use crate::input::FileInput;
 use ffmpeg_next as ffmpeg;
 use stream::MediaFile;
 
-use crate::input::FileInput;
 pub fn read_file<P: AsRef<Path>>(path: &P) -> io::Result<MediaFile> {
     let path = path.as_ref();
     let file_name = path.file_name().unwrap().to_str().unwrap().to_string();
@@ -22,6 +23,9 @@ pub fn read_file<P: AsRef<Path>>(path: &P) -> io::Result<MediaFile> {
     let fi = FileInput::new(format_ctx, path);
     let full_format_name = fi.format_name();
     let mut media_file = MediaFile::default();
+    let streams = fi.get_streams();
+    let stream_meta = meta::StreamMeta::new(streams);
+    media_file = media_file.set_audio_streams(stream_meta.get_audios().clone());
     media_file = media_file
         .set_filepath(path.to_str().unwrap().to_string())
         .set_filename(file_name)

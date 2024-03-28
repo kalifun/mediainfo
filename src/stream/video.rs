@@ -1,4 +1,4 @@
-#[derive(Default, Debug, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize, Clone)]
 pub struct VideoStream {
     pub codec: String,
     pub format: String,

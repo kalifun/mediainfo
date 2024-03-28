@@ -1,7 +1,5 @@
-use crate::ffmpeg::format::Input;
 use std::collections::HashMap;
 
-use std::path::Path;
 lazy_static! {
     pub static ref FORMAT_MAP: HashMap<&'static str, &'static str> = {
         let mut map = HashMap::new();

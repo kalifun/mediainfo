@@ -6,7 +6,7 @@ use crate::stream::audio::AudioStream;
 use crate::stream::subtitle::SubtitleStream;
 use crate::stream::video::VideoStream;
 
-#[derive(Default, Debug, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize, Clone)]
 pub struct MediaFile {
     pub filename: String,
     pub filepath: String,

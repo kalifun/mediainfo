@@ -1,4 +1,4 @@
-#[derive(Default, Debug, Serialize, Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize, Clone)]
 pub struct SubtitleStream {
     pub id: usize,
     pub format: String,

@@ -18,6 +18,7 @@ pub struct MediaFile {
     pub duration: u64,
     pub format: String,
     pub writing_lib: String,
+    pub bit_rate: u64,
     pub video_streams: Vec<VideoStream>,
     pub audio_streams: Vec<AudioStream>,
     pub subtitle_streams: Vec<SubtitleStream>,
@@ -71,6 +72,11 @@ impl MediaFile {
 
     pub fn set_writing_lib(mut self, writing_lib: String) -> Self {
         self.writing_lib = writing_lib;
+        self
+    }
+
+    pub fn set_bit_rate(mut self, bit_rate: u64) -> Self {
+        self.bit_rate = bit_rate;
         self
     }
 

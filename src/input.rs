@@ -42,11 +42,6 @@ impl<'a> FileInput<'a> {
         }
     }
 
-    #[warn(dead_code)]
-    pub fn get_bit_rate(&self) -> u64 {
-        self.input.bit_rate() as u64
-    }
-
     pub fn get_writing_lib(&self) -> String {
         let metadata = self.input.metadata();
         match metadata.get("encoder") {
@@ -57,5 +52,9 @@ impl<'a> FileInput<'a> {
 
     pub fn get_streams(&self) -> StreamIter {
         self.input.streams()
+    }
+
+    pub fn get_bit_rate(&self) -> u64 {
+        self.input.bit_rate() as u64
     }
 }

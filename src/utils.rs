@@ -28,6 +28,19 @@ fn convert_units(val: u64, base: f64, units: [&'static str; 8]) -> String {
     format!("{:.*}{}", precision, size, units[unit_index])
 }
 
+pub fn duration_format(secs: u64) -> String {
+    let hours = secs / 3600;
+    let minutes = (secs % 3600) / 60;
+    let seconds = secs % 60;
+    if hours > 0 {
+        format!("{:02}h {:02}m {:02}s", hours, minutes, seconds)
+    } else if minutes > 0 {
+        format!("{:02}m {:02}s", minutes, seconds)
+    } else {
+        format!("{:02}s", seconds)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -49,18 +62,12 @@ mod tests {
         assert_eq!(convert_to_iec_units(500), "500B");
         assert_eq!(convert_to_iec_units(10), "10.0B");
     }
-}
 
-pub fn duration_format(secs: u64) -> String {
-    let hours = secs / 3600;
-    let minutes = (secs % 3600) / 60;
-
-    let formatted_duration = format!("{:02}h {:02}m", hours, minutes);
-    formatted_duration
-}
-
-#[test]
-fn test_duration_format() {
-    assert_eq!(duration_format(3600), "01h 00m");
-    assert_eq!(duration_format(59148356183), "16430098h 56m");
+    #[test]
+    fn test_duration_format() {
+        assert_eq!(duration_format(3600), "01h 00m 00s");
+        assert_eq!(duration_format(3661), "01h 01m 01s");
+        assert_eq!(duration_format(61), "01m 01s");
+        assert_eq!(duration_format(59), "59s");
+    }
 }

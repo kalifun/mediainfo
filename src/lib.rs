@@ -37,6 +37,7 @@ pub fn read_file<P: AsRef<Path>>(path: &P) -> io::Result<MediaFile> {
         .set_format(fi.format_name())
         .set_writing_lib(fi.get_writing_lib())
         .set_duration(fi.duration())
+        .set_bit_rate(fi.get_bit_rate())
         .set_video_streams(stream_meta.get_videos().clone())
         .set_audio_streams(stream_meta.get_audios().clone())
         .set_subtitle_streams(stream_meta.get_subtitles().clone());
